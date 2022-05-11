@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <div class="container-fluid">
+    <div class="container">
+      <a class="navbar-brand" href="#">DolyApp</a>
+
+
+        <ul class="navbar-nav mr-auto" *ngIf=" accountservice.currentUser$ | async ">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="#">Matches</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Lists</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Message</a>
+          </li>
+
+        </ul>
+
+        <div class="dropdowen" *ngIf=" accountservice.currentUser$ | async " dropdown >
+          <a class="dropdown-toggle text-light" dropdownToggle >Welcome user</a>
+          <div class="dropdown-menu  mt-1"  *dropdownMenu>
+            <a class="dropdown-item">Edit profile</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)="Logout()" >Logout</a>
+          </div>
+        </div>
+
+        <form *ngIf="( accountservice.currentUser$ |async) === null" #LoginForm="ngForm"class="d-flex" style="margin-left: 20px;" (ngSubmit)="Login()"
+        autocomplete="off">
+          <input
+          name="Username"
+          [(ngModel)]="model.UserName"
+          class="form-control mr-2"
+          type="text" placeholder="UserName">
+
+          <input
+          name="Password"
+          [(ngModel)]="model.password"
+
+          class="form-control mr-2"
+          type="password" placeholder="PassWord">
+
+          <button class="btn btn-outline-success" type="submit">Login</button>
+        </form>
+
+    </div>
+    </div>
+
+</nav>
